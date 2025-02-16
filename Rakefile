@@ -50,7 +50,7 @@ namespace :docker do
       docker build \
         --build-arg="GOOS=${GOOS}" \
         --build-arg="GOARCH=${GOARCH}" \
-        --build-arg="BUILD_TAG=$(git describe --tags 2>/dev/null || git rev-parse --short HEAD 2>/dev/null || echo 'not_available')" \
+        --build-arg="BUILD_SHA=$(git describe --tags 2>/dev/null || git rev-parse --short HEAD 2>/dev/null || echo 'not_available')" \
         --build-arg="BUILD_DATE=$(date)" \
         -t #{DOCKER_IMAGE_NAME} .
     }

@@ -3,9 +3,9 @@ FROM golang:1.24-alpine AS builder
 WORKDIR /build
 COPY . .
 
-ARG BUILD_TAG
+ARG BUILD_SHA
 ARG BUILD_DATE
-RUN sed -i "s/{{BUILD_TAG}}/${BUILD_TAG}/g; s/{{BUILD_DATE}}/${BUILD_DATE}/g" /build/index.html
+RUN sed -i "s/{{BUILD_SHA}}/${BUILD_SHA}/g; s/{{BUILD_DATE}}/${BUILD_DATE}/g" /build/index.html
 
 ARG GOOS
 ARG GOARCH
