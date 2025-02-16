@@ -2,6 +2,7 @@ package main
 
 import (
 	"embed"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -10,9 +11,15 @@ import (
 var indexHTML embed.FS
 
 func main() {
+	addr := ":8000"
+
 	http.Handle("/", http.FileServer(http.FS(indexHTML)))
 
-	addr := ":8000"
+	http.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
+	fmt.Println("listening at:", addr)
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		log.Fatal(err)
 	}
